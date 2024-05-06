@@ -1,0 +1,10 @@
+# Folders
+
+dist/
+minified/
+node_modules/
+
+# Files
+
+pnpm-lock.yaml
+package-lock.json
