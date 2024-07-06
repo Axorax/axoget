@@ -1,0 +1,247 @@
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title axoget
+    link(rel="shortcut icon", href="axoget.ico")
+    link(rel="stylesheet", href="style.css")
+    script(src="jsonpath.lib.js", defer)
+    script(src="script.js", defer)
+  body
+    section#sidebar
+        div.top axoget 
+
+        .content 
+            button#guest-mode.button-2 Guest mode 
+
+            .group 
+                div.name
+                    p
+                        span Collections
+
+                .content 
+                    button.new.button-1 create new
+
+                    .collection 
+                        .name
+                            p JSONTESTING
+                            p.arrow ▼
+                        .content
+                            div
+                                p.method GET
+                                p.name Users
+                            div
+                                p.method POST
+                                p.name Own data
+                    
+                    .collection 
+                        .name
+                            p Pranks
+                            p.arrow ▼
+                        .content
+                            div
+                                p.method POST
+                                p.name one prank
+                            div
+                                p.method HEAD
+                                p.name Prank heads
+                        
+    main
+        section#info
+            button.toggle-sidebar.button-1(onclick="toggleSidebar()")
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M202.87-111.87q-37.78 0-64.39-26.61t-26.61-64.39v-554.26q0-37.78 26.61-64.39t64.39-26.61h554.26q37.78 0 64.39 26.61t26.61 64.39v554.26q0 37.78-26.61 64.39t-64.39 26.61H202.87Zm115.22-91v-554.26H202.87v554.26h115.22Zm91 0h348.04v-554.26H409.09v554.26Zm-91 0H202.87h115.22Z"/></svg> 
+
+            div.button-group
+                button.arrow.request.button-1
+                    p HTTP 
+                    p.arrow ▾
+                button.arrow.method.button-1.dropdown
+                    p GET 
+                    p.arrow ▾
+
+            .dropdown-content
+                - const methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS', 'LINK', 'UNLINK', 'LOCK', 'UNLOCK', 'COPY', 'VIEW', 'PROPFIND']
+                each method in methods
+                    button(onclick=`setMethod('${method}')`) #{method}
+
+            .input-wrapper
+                input(type="text", placeholder="Address", onkeydown="if (event.key === 'Enter') { sendRequest() }")
+            
+            div
+                .button-group.send-group
+                    button#send.button-2(onclick="sendRequest()") send 
+                    button.arrow.dropdown.button-2 ▼   
+                
+                ul.dropdown-content 
+                    button Send after delay 
+                    button Intervals 
+                
+                button.cancel.button-2.danger(style="width: 5rem;", onclick="cancelRequest()") Cancel
+        
+        section#tab-buttons-wrapper 
+            .tab-buttons 
+                button.active(onclick="setTab('headers', this)") Headers 
+                button(onclick="setTab('body', this)")  Body 
+                button(onclick="setTab('options', this)")  Options 
+                button(onclick="setTab('scripts', this)")  Scripts 
+                button(onclick="setTab('code', this)")  Code 
+
+            .tab-buttons 
+                button.active.response(onclick="setTab('response', this)")  Response 
+                button.headers(onclick="setTab('out-headers', this)")  Headers 
+                button(onclick="setTab('console', this)")  Console 
+                button(onclick="setTab('logs', this)")  Logs 
+        
+        section#tab-groups-wrapper 
+            .tab-group 
+                div#tab-headers.active
+                    div.curlies
+                        .dropdown
+                            button
+                                p Key-value
+                                p.arrow ▾
+                        
+                        ul.dropdown-content
+                            - const headerTypes = ['Key-value', 'JSON']
+                            each type in headerTypes
+                                button(onclick=`setSubtab('headers-${type}', this, true)`) #{type}
+                        
+                        span headers: {
+
+                    .subtab(style="height: calc(100% - 33.6px);")
+                        .groups 
+                            #subtab-headers-key-value.active 
+                                h1 hello
+
+                            #subtab-headers-JSON
+                                .input-1(spellcheck="false", contenteditable="true", onpaste="handlePaste(event)", placeholder='"Authorization Token": "69",')
+                    
+                    div.curlies.opposite
+                        span.bracket  }
+                        span.info
+
+                div#tab-body.hide
+                    div.curlies
+                        .dropdown.contentType
+                            button
+                                p JSON
+                                p.arrow ▾
+                        
+                        ul.dropdown-content
+                            - const types = ['JSON', 'HTML', 'xml', 'text']
+                            each type in types
+                                button(onclick=`setContentType('${type}')`) #{type}
+                        
+                        span body: {
+                    
+                    div.input-1(spellcheck="false", contenteditable="true", onpaste="handlePaste(event)", placeholder='"cool link": "https://youtu.be/dQw4w9WgXcQ",')
+                    
+                    div.tab-hide
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M338.63-280 480-421.37 621.37-280 680-338.63 538.63-480 680-621.37 621.37-680 480-538.63 338.63-680 280-621.37 421.37-480 280-338.63 338.63-280ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Zm0-91q133.04 0 225.09-92.04 92.04-92.05 92.04-225.09 0-133.04-92.04-225.09-92.05-92.04-225.09-92.04-133.04 0-225.09 92.04-92.04 92.05-92.04 225.09 0 133.04 92.04 225.09 92.05 92.04 225.09 92.04ZM480-480Z"/></svg>
+                        p This field cannot be used for this request method!
+                    
+                    .curlies.opposite
+                        span.bracket  }
+                        span.info
+
+                div#tab-options
+                    div.curlies 
+                        span  fetch('URL', {
+
+                    div.input-1(spellcheck="false", contenteditable="true", onpaste="handlePaste(event)", placeholder='"mode": "no-cors",')
+
+                    .curlies.opposite
+                        span.bracket  });
+                        span.info
+                
+                #tab-code 
+                    .subtab 
+                        .buttons 
+                            button.active(onclick="setSubtab('import', this)") Import
+                            button(onclick="setSubtab('export', this)") Export
+
+                        .groups 
+                            #subtab-import.active
+                                div.buttons
+                                    button.button-3(onclick="setImport('curl')") CUrl (bash)
+                                    button.button-3(onclick="setImport('powershell')") Powershell
+                                    button.button-3(onclick="setImport('wget')") wget
+                                    button.button-3(onclick="setImport('http')") HTTP
+                                    button.button-3(onclick="document.getElementById('import-axg-input').click();") axoget File (.axg)
+                                    button.button-3(onclick="setImport('axg')") axoget File (Paste content)
+                                    input(type="file", id="import-axg-input", style="display: none;", accept=".axg")
+
+                                div.import-input(style="display: none;")
+                                    button.button-3(onclick="setImport(null)") Go back
+                                    div.input-4(spellcheck="false", contenteditable="true", onpaste="handlePaste(event)", placeholder='Paste your data here...')
+                                    button.button-2(onclick="importRequest();") Confirm import
+
+                            #subtab-export 
+                                div.buttons
+                                    .search-1
+                                        div Export as
+                                        div 
+                                            input(placeholder="🔎︎ Search here...")
+                                    
+                                    button.button-3(onclick="setExport('axg')") axoget File (.axg)
+                                    button.button-3(onclick="setExport('js')") JavaScript 
+                                    button.button-3(onclick="setExport('jsws')") JavaScript with scripts 
+                                    button.button-3(onclick="setExport('wget')") wget
+
+                                .export-output 
+                                    button.button-3(onclick="setExport(null)") Go back
+                                    button.button-3(onclick="") Copy to clipboard 
+                                    pre 
+                                        div.code
+
+
+
+                div#tab-scripts
+                    .subtab
+                        .buttons
+                            button.active(onclick="setSubtab('prescript', this)") Pre-request
+                            button(onclick="setSubtab('postscript', this)") Post-request
+                            
+                        .groups
+                            div#subtab-prescript.active
+                                div.input-4#pre-request-input(spellcheck="false", contenteditable="true", onpaste="handlePaste(event)", placeholder='Pre-request scripts are run before the request is sent. They are written in JavaScript and executed in the backend.')
+
+                            div#subtab-postscript
+                                div.input-4#post-request-input(spellcheck="false", contenteditable="true", onpaste="handlePaste(event)", placeholder='Post-request scripts are run after the request is sent. They are written in JavaScript and executed in the backend. You can use the "data" variable which contains request\'s response.')
+
+            .tab-group 
+                div#tab-response.active
+                    .content
+                        .r
+                            svg(xmlns="http://www.w3.org/2000/svg", viewBox="0 -960 960 960")
+                                path(fill="#fff", d="M440-183v-274L200-596v274l240 139Zm80 0 240-139v-274L520-457v274Zm-40-343 237-137-237-137-237 137 237 137ZM160-252q-19-11-29.5-29T120-321v-318q0-22 10.5-40t29.5-29l280-161q19-11 40-11t40 11l280 161q19 11 29.5 29t10.5 40v318q0 22-10.5 40T800-252L520-91q-19 11-40 11t-40-11L160-252Zm320-228Z")
+                            h1 No requests sent yet...
+
+                    .subtab(style="display: none;")
+                        .buttons
+                            button.active(onclick="setSubtab('response', this)") JSON (Visual)
+                            button(onclick="setSubtab('preview', this)") Preview
+                            button(onclick="setSubtab('render', this)") Render
+                            
+                        .groups
+                            div#subtab-response.active
+
+                            #subtab-preview
+                                iframe(id="preview-iframe", frameborder="0")
+                            
+                            #subtab-render 
+                                iframe(id="render-iframe", frameborder="0")
+            
+                    .curlies.opposite(style="display: none;")
+                        input(placeholder='JSONPATH ($.yt.subs[*].axorax)', type="text", oninput="useJSONPATH(this)", onkeydown="if (event.key === 'Enter') { useJSONPATH(this, 0) }")
+
+
+                div#tab-out-headers 
+                    .input-3
+                        div(style="color: #ffc55a;border: none;margin: 0; padding: 0;") No requests sent yet...
+
+        footer
+            a.donate(href="https://www.patreon.com/axorax", target="_blank")
+                svg(xmlns="http://www.w3.org/2000/svg", height="24", viewBox="0 -960 960 960", width="24")
+                    path(d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z")
+            p v1.0.0

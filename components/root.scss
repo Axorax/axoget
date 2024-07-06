@@ -1,0 +1,77 @@
+@font-face {
+	font-family: 'default';
+	src: url('manrope.ttf');
+}
+
+@font-face {
+	font-family: 'mono';
+	src: url('martianmono.ttf');
+}
+
+:root {
+	color-scheme: dark;
+}
+
+:focus-visible {
+	z-index: 9999;
+	outline-offset: 3px;
+	outline: 1.5px solid #279eff;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'default', sans-serif;
+}
+
+body {
+	background: #212429;
+	counter-reset: section;
+}
+
+div[contenteditable] {
+	white-space: pre-wrap !important;
+}
+
+ul {
+	list-style: none;
+}
+
+hr {
+	border: none;
+	width: 100%;
+	border-radius: 9rem;
+	height: 1.5px;
+	background: $border-color;
+	margin: $gap 0;
+}
+
+// Main
+
+main {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	margin-left: 0;
+	height: 100dvh;
+
+	&.active {
+		margin-left: $sidebar !important;
+	}
+}
+
+// Custom Scroll Bar
+
+::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+
+::-webkit-scrollbar-thumb {
+	background: transparent;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}

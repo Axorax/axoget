@@ -1,0 +1,46 @@
+{
+	"extends": ["stylelint-scss"],
+	"plugins": ["stylelint-scss"],
+	"rules": {
+		"at-rule-no-unknown": [
+			true,
+			{
+				"ignoreAtRules": ["mixin", "include"]
+			}
+		],
+		"no-descending-specificity": null,
+		"scss/at-rule-no-unknown": true,
+		"block-no-empty": true,
+		"color-no-invalid-hex": true,
+		"comment-no-empty": true,
+		"declaration-block-no-duplicate-properties": true,
+		"declaration-block-no-shorthand-property-overrides": true,
+		"font-family-no-duplicate-names": true,
+		"font-family-no-missing-generic-family-keyword": true,
+		"function-calc-no-unspaced-operator": true,
+		"function-linear-gradient-no-nonstandard-direction": true,
+		"keyframe-declaration-no-important": true,
+		"media-feature-name-no-unknown": true,
+		"named-grid-areas-no-invalid": true,
+		"no-duplicate-at-import-rules": true,
+		"no-duplicate-selectors": true,
+		"no-empty-source": true,
+		"property-no-unknown": true,
+		"selector-pseudo-class-no-unknown": true,
+		"selector-pseudo-element-no-unknown": true,
+		"selector-type-no-unknown": true,
+		"string-no-newline": true,
+		"unit-no-unknown": true,
+		"scss/map-keys-quotes": "always",
+		"scss/dollar-variable-no-missing-interpolation": true,
+		"scss/double-slash-comment-empty-line-before": "always",
+		"scss/double-slash-comment-whitespace-inside": "always",
+		"scss/operator-no-newline-before": true,
+		"scss/operator-no-newline-after": true,
+		"scss/comment-no-loud": true,
+		"scss/comment-no-empty": true,
+		"scss/partial-no-import": true,
+		"scss/load-no-partial-leading-underscore": true,
+		"scss/selector-no-redundant-nesting-selector": true
+	}
+}

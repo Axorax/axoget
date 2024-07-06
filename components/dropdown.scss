@@ -1,0 +1,35 @@
+.dropdown-content {
+	display: none;
+	flex-direction: column;
+	position: fixed;
+	background: $dark-2;
+	user-select: none;
+	z-index: 99;
+	border: $border;
+	border-radius: 5px;
+	background: #191919;
+	margin-top: $gap;
+	min-width: max(10vw, 10rem);
+	box-shadow: 7px 5px 10px #00000031;
+	height: max-content;
+	overflow-y: scroll;
+
+	> button {
+		outline: none;
+		width: 100%;
+		text-align: left;
+		border-top: $border;
+
+		&:hover {
+			background: #272727;
+		}
+	}
+
+	> button:first-child {
+		border-top: none;
+	}
+
+	&.active {
+		display: flex;
+	}
+}

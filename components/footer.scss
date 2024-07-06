@@ -1,0 +1,28 @@
+footer {
+	border: $border;
+	border-radius: 5px;
+	background: $dark-2;
+	width: calc(100% - (2 * $gap));
+	margin: $gap;
+	padding: $footer-gap;
+	display: flex;
+	align-items: center;
+
+	svg {
+		width: max(1vw, 0.9rem);
+		height: max(1vw, 0.9rem);
+		aspect-ratio: 1/1;
+		filter: invert(1);
+		cursor: pointer;
+
+		&:hover {
+			filter: invert(57%) sepia(31%) saturate(5917%) hue-rotate(185deg) brightness(101%) contrast(101%);
+		}
+	}
+
+	> p {
+		margin-left: auto;
+		font-weight: bold;
+		font-size: $font-m;
+	}
+}

@@ -1,0 +1,126 @@
+{
+	"name": "axoget",
+	"version": "1.0.0",
+	"description": "Simple and fast API testing",
+	"productName": "axoget",
+	"main": "minified/main.js",
+	"scripts": {
+		"watch-scss": "sass --watch style.scss src/static/style.css --style=compressed --no-source-map",
+		"compile-scss": "sass style.scss src/static/style.css --style=compressed --no-source-map",
+		"ts": "tsc --watch",
+		"pug": "pug --watch src/views",
+		"electron": "node fix && electron src/main.js",
+		"start": "npm run compile-scss && tsc && pug src/views/home.pug && node fix && electron src/main.js",
+		"nstart": "nodemon --watch src --exec npm run electron",
+		"dev": "npm-run-all --parallel watch-scss ts pug nstart",
+		"lint:styles": "stylelint *.scss",
+		"build": "(if exist minified rmdir /S /Q minified) && npm run lint:styles && npm run compile-scss && tsc && pug src/views/home.pug && node fix && xcopy src minified /E /I && cd minified && terser main.js -o main.js -c -m --comments false && terser static/script.js -o static/script.js -c -m --comments false && cd .. & electron-builder"
+	},
+	"nodemonConfig": {
+		"ext": "js,html,css,ttf,ico,icns"
+	},
+	"build": {
+		"asar": true,
+		"compression": "maximum",
+		"files": [
+			"./minified/**/*",
+			"!*.ts",
+			"!*.pug",
+			"!*.scss",
+			"!*.test.*"
+		],
+		"appId": "com.Axorax.axoget",
+		"copyright": "Copyright © 2024 Axorax",
+		"productName": "axoget",
+		"removePackageKeywords": true,
+		"win": {
+			"target": [
+				"portable",
+				"nsis",
+				"nsis-web",
+				"msi",
+				"zip",
+				"7z",
+				"tar.gz",
+				"tar.xz",
+				"tar.bz2",
+				"dir"
+			],
+			"icon": "minified/static/axoget.ico"
+		},
+		"mac": {
+			"target": [
+				"dmg",
+				"zip",
+				"7z",
+				"tar.gz",
+				"tar.xz",
+				"tar.bz2",
+				"dir"
+			]
+		},
+		"linux": {
+			"target": [
+				"AppImage",
+				"flatpak",
+				"apk",
+				"freebsd",
+				"pacman",
+				"deb",
+				"snap",
+				"rpm"
+			],
+			"icon": "minified/static/axoget.ico"
+		},
+		"nsis": {
+			"oneClick": false,
+			"installerIcon": "minified/static/axoget.ico",
+			"uninstallerIcon": "minified/static/axoget.ico",
+			"license": "LICENSE",
+			"allowToChangeInstallationDirectory": true,
+			"uninstallDisplayName": "axoget"
+		},
+		"msi": {
+			"oneClick": false,
+			"runAfterFinish": true,
+			"createDesktopShortcut": true,
+			"createStartMenuShortcut": true,
+			"perMachine": false
+		},
+		"portable": {
+			"unicode": false,
+			"artifactName": "axoget.exe"
+		}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Axorax/axoget.git"
+	},
+	"keywords": [
+		"axoget",
+		"api-testing"
+	],
+	"author": "Axorax",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Axorax/axoget/issues"
+	},
+	"homepage": "https://github.com/Axorax/axoget#readme",
+	"dependencies": {
+		"express": "^4.18.2",
+		"jsonpath-plus": "^9.0.0",
+		"prse": "^2.2.0"
+	},
+	"devDependencies": {
+		"electron": "^27.0.4",
+		"electron-builder": "^24.6.4",
+		"nodemon": "^3.1.0",
+		"npm-run-all": "^4.1.5",
+		"pug-cli": "^1.0.0-alpha6",
+		"sass": "^1.77.4",
+		"stylelint": "^16.6.1",
+		"stylelint-scss": "^6.3.0",
+		"terser": "^5.31.0",
+		"typescript": "^5.4.5"
+	}
+}

@@ -1,0 +1,46 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title axoget
+    style.
+      @font-face {
+        font-family: 'default';
+        src: url('manrope.ttf');
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: 'default', sans-serif;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100dvh;
+        background: #FCA92F;
+      }
+
+      body > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      img {
+        aspect-ratio: 1/1;
+        width: 10rem;
+        max-width: calc(100% - 5rem);
+        border-radius: 50%;
+        border: 2.5px solid #fff;
+      }
+  body
+    div
+      img(src="./axoget.ico" alt="Logo")
+      h1 Axoget
