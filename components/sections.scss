@@ -1,0 +1,92 @@
+section#info {
+	margin: $gap;
+	display: flex;
+	flex-wrap: wrap;
+	width: calc(100% - 2 * $gap);
+	gap: $gap;
+
+	.toggle-sidebar {
+		padding: 0.3rem 0.5rem;
+
+		svg {
+			aspect-ratio: 1/1;
+			width: 20px;
+		}
+	}
+
+	.cancel {
+		display: none;
+		min-width: 7.7rem !important;
+	}
+
+	.send-group {
+		#send {
+			width: 5rem;
+		}
+		> button:last-child {
+			border-left: 1px solid #2989d7;
+		}
+	}
+
+	.input-wrapper {
+		flex-grow: 1;
+	}
+
+	> div > input {
+		@include input;
+		width: 100%;
+		border-radius: 5px;
+		border: $border;
+		background: $dark-2;
+
+		&:focus,
+		&:hover {
+			border-color: #4a639f;
+		}
+	}
+}
+
+section#tab-groups-wrapper {
+	display: flex;
+	margin: 0 $gap;
+	width: calc(100% - 2 * $gap);
+	gap: $gap;
+	flex-grow: 1;
+	overflow-y: scroll;
+
+	.tab-group {
+		width: 50%;
+		position: relative;
+
+		border: $border;
+		word-break: break-all;
+		background: $dark-2;
+		height: 100%;
+		max-height: 100%;
+		overflow-y: scroll;
+		min-height: 15rem;
+
+		.input-1 {
+			height: calc(100% - 35.2px - 35.2px);
+		}
+
+		> div {
+			display: none;
+			height: 100%;
+			width: 100%;
+
+			&.hide {
+				.tab-hide {
+					display: flex;
+				}
+				.curlies {
+					display: none;
+				}
+			}
+
+			&.active {
+				display: block;
+			}
+		}
+	}
+}

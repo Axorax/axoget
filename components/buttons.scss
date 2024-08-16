@@ -1,0 +1,101 @@
+button {
+	background: transparent;
+	border: none;
+	font-size: $font-m;
+	cursor: pointer;
+	user-select: none;
+	padding: $button-padding;
+}
+
+.button-group {
+	display: flex;
+
+	> button:first-child {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		border-right: none;
+	}
+
+	> button:last-child {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+}
+
+.button-1 {
+	border: $border;
+	border-radius: 5px;
+	transition: 200ms ease;
+
+	&.arrow {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 6rem;
+		text-align: left;
+
+		> .arrow {
+			margin-left: auto;
+		}
+	}
+
+	&:hover {
+		background: #272727;
+	}
+}
+
+.button-2 {
+	background: #279eff;
+	border-radius: 5px;
+	transition: 200ms ease;
+
+	&:hover {
+		background: #2693ec;
+	}
+
+	&.danger {
+		background: #d80032;
+	}
+}
+
+.button-3 {
+	width: 100%;
+	text-align: left;
+	border-bottom: $border;
+	padding: 0.8rem;
+	transition: 200ms;
+	position: relative;
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		right: 40px;
+		width: 2.5px;
+		height: 8px;
+		background: #fff;
+		transition: 300ms;
+	}
+
+	&::before {
+		transform: rotate(-45deg);
+		top: 15px;
+	}
+
+	&::after {
+		transform: rotate(45deg);
+		top: 20.6px;
+	}
+
+	&:hover::before,
+	&:hover::after,
+	&:focus::before,
+	&:focus::after {
+		right: 30px;
+	}
+
+	&:hover,
+	&:focus {
+		background: #202126;
+	}
+}
